@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { v4 as uuid } from 'uuid';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -10,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
 import { getCorrectedText } from 'utils/helpers';
 
 const useStyles = makeStyles({
@@ -44,7 +44,7 @@ interface IMuiTableProps {
 }
 
 export const MuiTable = ({ columns, data, isBusy }: IMuiTableProps) => {
-  const classes = useStyles();
+  const classes = useStyles() as Record<string, string>;
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
@@ -59,20 +59,24 @@ export const MuiTable = ({ columns, data, isBusy }: IMuiTableProps) => {
 
   if (isBusy) {
     return (
-      <div className={classes.loading}>
+      <div className={classes.loading} data-testid={'circular-progress-container'}>
         <CircularProgress size={80} />
       </div>
     );
   }
 
   return (
-    <Paper className={classes.root}>
+    <Paper className={classes.root} data-testid='Mui-table-container'>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
-                <TableCell key={uuid()} align={column.align} style={{ minWidth: column.minWidth }}>
+              {columns.map(column => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
                   {column.label}
                 </TableCell>
               ))}
@@ -81,11 +85,22 @@ export const MuiTable = ({ columns, data, isBusy }: IMuiTableProps) => {
           <TableBody>
             {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: any) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={uuid()}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
+                <TableRow
+                  hover
+                  role="checkbox"
+                  tabIndex={-1}
+                  key={row.id}
+                  data-testid={`TableRow-${row.id}`}
+                >
+                  {columns.map(column => {
+                    const value = row[column.label];
                     return (
-                      <TableCell key={uuid()} align={column.align} className={classes.row}>
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        className={classes.row}
+                        data-testid={`TableCell-${column.id}`}
+                      >
                         {column.format ? column.format(value, row) : getCorrectedText(value)}
                       </TableCell>
                     );

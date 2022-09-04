@@ -1,14 +1,15 @@
 import { Overmind } from 'overmind';
 import jwt_decode from 'jwt-decode';
 import { Context, OvermindContext } from 'store';
-import { Api } from 'utils/Api';
-import { appKey } from 'utils/contstants';
 import { ISignInFormValues } from 'types/sing-in';
-import { showError } from 'utils/helpers';
 import {
   AUTH_SIGNIN_URL,
   LOGOUT_URL, 
 } from 'store/api';
+
+import { Api } from 'utils/Api';
+import { appKey } from 'utils/contstants';
+import { showError } from 'utils/helpers';
 
 import { STATE_PERSIST_KEYS } from '../contstants';
 import { RootState } from '../state';
@@ -30,7 +31,7 @@ export const onInitialize = async ({ state }: Context, overmind: Overmind<Overmi
     persist(path, data);
   });
 
-  STATE_PERSIST_KEYS.forEach((key) => {
+  STATE_PERSIST_KEYS.forEach(key => {
     const value = getPersisted(key);
     value && (state[key] = value);
   });

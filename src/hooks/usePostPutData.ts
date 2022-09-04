@@ -3,7 +3,12 @@ import { toast } from 'react-toastify';
 
 import { Api } from 'utils/Api';
 
-const usePostPutData = (url: string, isPut: boolean, disableNotification: boolean, successMessage: string) => {
+const usePostPutData = (
+  url: string,
+  isPut: boolean,
+  disableNotification: boolean,
+  successMessage: string
+) => {
   return useCallback(
     async (data: any) => {
       if (!url) return {};
@@ -20,7 +25,7 @@ const usePostPutData = (url: string, isPut: boolean, disableNotification: boolea
         message: res.status,
       };
     },
-    [url, disableNotification, successMessage]
+    [url, isPut, disableNotification, successMessage]
   );
 };
 

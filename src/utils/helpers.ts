@@ -100,7 +100,7 @@ export const createParams = (params: { [key: string]: any }) =>
   params && Object.keys(params).length
     ? '?' +
       Object.keys(params)
-        .map((key) => `${key}=${params[key]}`)
+        .map((key: string) => `${key}=${params[key]}`)
         .join('&')
     : '';
 
@@ -118,7 +118,7 @@ export const showError = (error: string | string[] | undefined) => {
   }
 
   if (Array.isArray(error)) {
-    error.map((item) => notifyError(item));
+    error.map((item: string) => notifyError(item));
   } else {
     notifyError(error);
   }

@@ -1,11 +1,12 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'overmind-react';
 import { ToastContainer } from 'react-toastify';
-import App from './App';
-import { Autorize } from 'utils/autorize';
 import { store } from 'store';
 import { BrowserRouter as Router } from 'react-router-dom';
+
+import { Authorize } from 'utils/autorize';
+
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -24,9 +25,9 @@ root.render(
         draggable
         pauseOnHover
       />
-      <Autorize>
+      <Authorize>
         <App />
-      </Autorize>
+      </Authorize>
     </Router>
   </Provider>
 );

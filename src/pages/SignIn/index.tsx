@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { FormikErrors, useFormik } from 'formik';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -14,12 +14,12 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import HelpIcon from '@material-ui/icons/Help';
-
 import { ISignInFormValues } from 'types/sing-in';
-import { getSignInFormValidation } from 'utils/validations';
 import { useStore } from 'store';
 
-const useStyles = makeStyles((theme) => ({
+import { getSignInFormValidation } from 'utils/validations';
+
+const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const SignIn = () => {
-  const classes = useStyles();
+  const classes = useStyles() as Record<string, string>;
   const {
     state: { isFetching },
     actions: { login },
@@ -78,7 +78,7 @@ export const SignIn = () => {
 
       return errors;
     },
-    onSubmit: (values) => {
+    onSubmit: values => {
       login(values);
     },
   });
@@ -138,7 +138,9 @@ export const SignIn = () => {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
             checked={values.rememberMe}
-            onChange={(e: any) => setFieldValue('rememberMe', e.target.checked)}
+            onChange={(e: ChangeEvent<{}>, checked: boolean) =>
+              setFieldValue('rememberMe', checked)
+            }
           />
           <Button
             fullWidth
@@ -152,7 +154,7 @@ export const SignIn = () => {
           </Button>
           <a href="mailto:mail@htmlacademy.ru" className={classes.help}>
             <span className={classes.helpText}>Help</span>
-            <HelpIcon color="primary"  />
+            <HelpIcon color="primary" />
           </a>
         </form>
       </div>

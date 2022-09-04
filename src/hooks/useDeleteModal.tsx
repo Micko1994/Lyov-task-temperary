@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
-
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
@@ -8,7 +7,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
 import {
   CAR_URL,
   USER_URL,
@@ -20,8 +18,9 @@ import {
   DICTIONARY_VALUE_URL,
   TASKS_TEMPLATE_URL,
 } from 'store/api';
-import { Api } from 'utils/Api';
 import { toast } from 'react-toastify';
+
+import { Api } from 'utils/Api';
 import { showError } from 'utils/helpers';
 
 const useStyles = makeStyles(() =>
@@ -70,7 +69,7 @@ const routesUrlHasMap: { [key: string]: string } = {
 };
 
 export const useDeleteModal = (): any => {
-  const classes = useStyles();
+  const classes = useStyles() as Record<string, string>;
   const { goBack } = useHistory();
   const { id }: any = useParams();
   const { pathname } = useLocation();
@@ -112,8 +111,8 @@ export const useDeleteModal = (): any => {
             Delete ?
           </Typography>
           <Typography className={classes.text} component="p">
-            This action can’t be undone. When you delete this car, it will be erased from the system. All linked car
-            parts will remain in the system.
+            This action can’t be undone. When you delete this car, it will be erased from the
+            system. All linked car parts will remain in the system.
           </Typography>
           <Paper elevation={0} className={classes.buttonsBlock}>
             <Button
