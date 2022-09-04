@@ -1,0 +1,21 @@
+export const BASE_URL = process.env.REACT_APP_HTTP_API_ENDPOINT;
+
+export const USER_URL = `${BASE_URL}/user`;
+export const DICTIONARY_URL = `${BASE_URL}/dictionary`;
+export const DICTIONARY_VALUE_URL = `${BASE_URL}/dictionary/value`;
+export const ORGANIZATION_URL = `${BASE_URL}/organization`;
+export const AUTH_SIGNIN_URL = `${BASE_URL}/auth/local/signin`;
+export const AUTH_REFRESH_URL = `${BASE_URL}/auth/refresh`;
+export const LOGOUT_URL = `${BASE_URL}/auth/logout`;
+export const CAR_URL = `${BASE_URL}/car`;
+export const CAR_MARK_URL = `${BASE_URL}/car/mark`;
+export const CAR_MODEL_URL = `${BASE_URL}/car/model`;
+export const CAR_MILEAGE_URL = `${BASE_URL}/car/mileage`;
+export const CAR_PART_CATEGORY_URL = `${BASE_URL}/part/category`;
+export const CAR_PART_URL = `${BASE_URL}/part`;
+export const MAINTENANCE_URL = `${BASE_URL}/maintenance`;
+export const EVENTS_URL = `${BASE_URL}/event`;
+export const TASKS_LINK_EXPLORER_URL = `${BASE_URL}/task/link/explore`;
+export const TASKS_TEMPLATE_URL = `${BASE_URL}/task/template`;
+export const TASKS_URL = `${BASE_URL}/task`;
+export const MEDIA_FILE_URL = `${BASE_URL}/media/file`;
