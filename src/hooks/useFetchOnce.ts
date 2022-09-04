@@ -1,11 +1,16 @@
 import { useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
+import { useStore } from 'store';
 
 import { Api } from 'utils/Api';
 import { createParams } from 'utils/helpers';
-import { useStore } from 'store';
 
-export const useFetchOnce = (initialData: any, url: string, disableNotification = true, isGet = false) => {
+export const useFetchOnce = (
+  initialData: any,
+  url: string,
+  disableNotification: boolean = true,
+  isGet: boolean = false
+) => {
   const {
     actions: { logout, handleLoading },
   } = useStore();
@@ -40,11 +45,11 @@ export const useFetchOnce = (initialData: any, url: string, disableNotification 
         return currentData;
       } catch (err: any) {
         if (err?.response?.status === 401) {
-          logout();
+          await logout();
         }
       }
     },
-    [url, isGet, disableNotification]
+    [url, handleLoading, initialData, logout]
   );
 
   return [data, fetchData, isLoading, count, hasError];

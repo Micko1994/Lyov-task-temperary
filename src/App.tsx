@@ -1,18 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import { Ref, useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { createStyleHelper } from 'utils/helpers';
-import LoadingBar from 'react-top-loading-bar';
+import LoadingBar, { LoadingBarRef } from 'react-top-loading-bar';
 import { useStore } from 'store';
+
+import { createStyleHelper } from 'utils/helpers';
 
 const useStyles = makeStyles(createStyleHelper);
 
 const App = () => {
-  const classes: any = useStyles();
+  const classes = useStyles() as Record<string, string>;
   const {
     state: { isFetching },
   } = useStore();
-
-  const loaderRef: any = useRef(null);
+  const loaderRef: Ref<LoadingBarRef> = useRef(null);
 
   useEffect(() => {
     if (isFetching) {
@@ -23,7 +23,7 @@ const App = () => {
   }, [isFetching, loaderRef]);
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} data-testid={'app-root'}>
       <LoadingBar color="#07bc0c" height={4} ref={loaderRef} />
       Hello
     </div>

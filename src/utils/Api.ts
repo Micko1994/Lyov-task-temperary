@@ -1,5 +1,4 @@
 import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig } from 'axios';
-
 import { BASE_URL } from 'store/api';
 
 const getAccessToken = () => {
@@ -51,7 +50,11 @@ export class Api {
     //@ts-ignore
     Api.getAxios().defaults.headers.Authorization = `Bearer ${token}`;
   }
-  static get<T = any>(url: string, params: Record<string, any> = {}, config: AxiosRequestConfig = {}): AxiosPromise<T> {
+  static get<T = any>(
+    url: string,
+    params: Record<string, any> = {},
+    config: AxiosRequestConfig = {}
+  ): AxiosPromise<T> {
     return Api.getAxios().get(url, { params, ...config });
   }
 
@@ -63,15 +66,27 @@ export class Api {
     return Api.getAxios().delete(url, { params, ...config });
   }
 
-  static post<T = any>(url: string, data?: Record<string, any>, config?: AxiosRequestConfig): AxiosPromise<T> {
+  static post<T = any>(
+    url: string,
+    data?: Record<string, any>,
+    config?: AxiosRequestConfig
+  ): AxiosPromise<T> {
     return Api.getAxios().post(url, data, config);
   }
 
-  static put<T = any>(url: string, data?: Record<string, any>, config?: AxiosRequestConfig): AxiosPromise<T> {
+  static put<T = any>(
+    url: string,
+    data?: Record<string, any>,
+    config?: AxiosRequestConfig
+  ): AxiosPromise<T> {
     return Api.getAxios().put(url, data, config);
   }
 
-  static patch<T = any>(url: string, data?: Record<string, any>, config?: AxiosRequestConfig): AxiosPromise<T> {
+  static patch<T = any>(
+    url: string,
+    data?: Record<string, any>,
+    config?: AxiosRequestConfig
+  ): AxiosPromise<T> {
     return Api.getAxios().patch(url, data, config);
   }
 }

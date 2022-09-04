@@ -3,9 +3,10 @@ import { Listener } from 'symbol-sdk';
 
 const ESAPE_FORMAT = 'YYYY-MM-DDTHH:mm:ssZ[Z]';
 
-const formatTransactionLocalDateTime = (dt: Date): string => (dt ? dayjs(dt).format(ESAPE_FORMAT) : '');
+const formatTransactionLocalDateTime = (dt: Date): string =>
+  dt ? dayjs(dt).format(ESAPE_FORMAT) : '';
 const sleep = (ms: number): Promise<void> => {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => {
       resolve();
     }, ms);
@@ -61,7 +62,8 @@ const durationStringToMilliseconds = (value: string): number => {
   return total;
 };
 
-const durationStringToSeconds = (str: string): number => Math.floor(durationStringToMilliseconds(str) / 1000);
+const durationStringToSeconds = (str: string): number =>
+  Math.floor(durationStringToMilliseconds(str) / 1000);
 const generateCleanData: any = (data: { [key: string]: any }): any => {
   const newData = { ...data };
 
